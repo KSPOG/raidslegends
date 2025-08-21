@@ -13,6 +13,7 @@ public class SettingsWindow extends JFrame {
     private final JSpinner runCount;
     private final JTextArea logArea = new JTextArea(8, 40);
 
+
     private final JTextArea logArea = new JTextArea(8, 40);
 
     public SettingsWindow() {
@@ -28,7 +29,6 @@ public class SettingsWindow extends JFrame {
         runCount = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
 
 
-
         JPanel settingsPanel = new JPanel(new GridLayout(0, 1));
         settingsPanel.add(autoSell);
         settingsPanel.add(enableOcr);
@@ -42,17 +42,29 @@ public class SettingsWindow extends JFrame {
         center.add(settingsPanel, BorderLayout.NORTH);
         center.add(logScroll, BorderLayout.CENTER);
 
+        JButton screenshot = new JButton("Screenshot");
+        screenshot.addActionListener(e -> WindowClicker.saveScreenshot("raid-window.png"));
+
         JButton start = new JButton("Start");
         start.addActionListener(e -> startBot());
+
+
+        JButton start = new JButton("Start");
+        start.addActionListener(e -> startBot());
+
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveSettings());
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        buttons.add(screenshot);
+
         buttons.add(start);
         buttons.add(save);
 
         add(center, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
+
 
 
         LogWindow.install(logArea);
@@ -68,6 +80,7 @@ public class SettingsWindow extends JFrame {
 
         add(center, BorderLayout.CENTER);
         add(save, BorderLayout.SOUTH);
+
 
         pack();
         setLocationRelativeTo(null); // center on screen
@@ -90,15 +103,18 @@ public class SettingsWindow extends JFrame {
         System.out.println("Start button clicked");
 
 
+
     private void startBot() {
         saveSettings();
         // Placeholder for actual bot start logic.
         System.out.println("Bot started");
 
+
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
 
 
     public static void main(String[] args) {
