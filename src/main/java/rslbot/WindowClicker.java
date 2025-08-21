@@ -1,6 +1,7 @@
 package rslbot;
 
 
+
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -52,6 +53,7 @@ public final class WindowClicker {
      * Performs a left-click at the given absolute screen coordinates. The
      * method preserves the current mouse location and restores it once the
      * click has been issued.
+
      * Convenience helper that aims a click at the centre of the screen. The
      * coordinates may require adjustment for a specific window layout.
      */
@@ -67,6 +69,7 @@ public final class WindowClicker {
      * @param screenX absolute X coordinate
      * @param screenY absolute Y coordinate
      * @return {@code true} if the click was dispatched successfully
+
      */
     public static boolean click(int screenX, int screenY) {
         try {
@@ -87,6 +90,7 @@ public final class WindowClicker {
     /**
      * Captures a screenshot of the entire desktop and writes it to the given
      * file path. This can assist in locating buttons manually.
+
 
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
@@ -175,6 +179,7 @@ public final class WindowClicker {
     /**
      * Returns an image of the full screen. Callers may crop to the Raid window
      * if desired.
+
      * Returns a {@link BufferedImage} of the full screen. This method does not
      * attempt to locate the game window; callers may crop the image as needed.
      */
@@ -189,6 +194,7 @@ public final class WindowClicker {
         }
     }
 }
+
 
      * Returns a {@link BufferedImage} containing the contents of the game
      * window, or {@code null} if the window cannot be located.

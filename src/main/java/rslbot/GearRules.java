@@ -1,8 +1,10 @@
 package rslbot;
 
 import java.util.Collections;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+
 import java.util.List;
 
 /**
@@ -20,6 +22,10 @@ public class GearRules {
     }
 
     public static List<SellRule> loadRules(String path) throws Exception {
+
+        // JSON parsing removed to keep the project self-contained.
+        return Collections.emptyList();
+
 
         // JSON parsing removed to keep the project self-contained.
         return Collections.emptyList();

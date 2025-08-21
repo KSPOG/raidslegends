@@ -35,6 +35,7 @@ public class BotCore {
                 Thread.sleep(3000);
             } else if (!screen.findAndClick("images/fight_button.png")) {
 
+
             // Locate and click the Fight button inside the game client.
             if (!screen.findAndClick("images/fight_button.png")) {
 

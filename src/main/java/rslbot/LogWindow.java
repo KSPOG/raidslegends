@@ -25,6 +25,7 @@ public final class LogWindow {
 
 
 
+
 /* * Simple window that displays log messages redirected from System.out/err.
  */
 public class LogWindow extends JFrame {
@@ -78,6 +79,7 @@ public class LogWindow extends JFrame {
 
 
 
+
         private final LogWindow window;
         private final StringBuilder buffer = new StringBuilder();
 
@@ -98,6 +100,7 @@ public class LogWindow extends JFrame {
                     area.append(line + System.lineSeparator());
                     area.setCaretPosition(area.getDocument().getLength());
                 });
+
 
 
 

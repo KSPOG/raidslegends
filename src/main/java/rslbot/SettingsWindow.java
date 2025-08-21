@@ -9,6 +9,7 @@ import java.awt.*;
  * and the Start button toggles to Stop while the bot is active.
 
 
+
  * Simple Swing window that provides a few configuration options
  * similar to those found in the RSLHelper application.
 
@@ -30,6 +31,7 @@ public class SettingsWindow extends JFrame {
 
 
 
+
     private final JTextArea logArea = new JTextArea(8, 40);
 
 
@@ -45,7 +47,6 @@ public class SettingsWindow extends JFrame {
         autoSell = new JCheckBox("Auto sell gear");
         enableOcr = new JCheckBox("Enable OCR");
         runCount = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
-
 
         JPanel settingsPanel = new JPanel(new GridLayout(0, 1));
         settingsPanel.add(autoSell);
@@ -79,12 +80,10 @@ public class SettingsWindow extends JFrame {
         JButton start = new JButton("Start");
         start.addActionListener(e -> startBot());
 
-
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveSettings());
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-
         buttons.add(screenshot);
         buttons.add(start);
         buttons.add(save);
@@ -121,7 +120,6 @@ public class SettingsWindow extends JFrame {
 
         add(center, BorderLayout.CENTER);
         add(save, BorderLayout.SOUTH);
-
 
         pack();
         setLocationRelativeTo(null); // center on screen
@@ -178,7 +176,6 @@ public class SettingsWindow extends JFrame {
         saveSettings();
         // Placeholder for actual bot start logic.
         System.out.println("Bot started");
-
 
     }
 

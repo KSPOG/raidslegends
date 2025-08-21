@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+
 import org.bytedeco.opencv.opencv_core.*;
 import org.bytedeco.opencv.global.opencv_imgcodecs;
 import org.bytedeco.opencv.global.opencv_imgproc;
@@ -27,6 +28,7 @@ public class ScreenUtils {
             int centreX = r.x + r.width / 2;
             int centreY = r.y + r.height / 2;
             WindowClicker.click(centreX, centreY);
+
      * Finds the given template and sends a click to its top-left coordinate.
      */
     public boolean findAndClick(String templatePath) {
@@ -61,7 +63,7 @@ public class ScreenUtils {
                         return new Rectangle(x, y, template.getWidth(), template.getHeight());
                     }
                 }
-                        return new Point(x, y);
+     return new Point(x, y);
                     }
                 }
 
@@ -96,5 +98,6 @@ public class ScreenUtils {
         Mat mat = new Mat(height, width, opencv_core.CV_8UC3);
         // Conversion code omitted for brevity.
         return mat;
+
     }
 }
