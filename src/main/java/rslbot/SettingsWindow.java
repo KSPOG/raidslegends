@@ -10,6 +10,7 @@ import java.awt.*;
 
  * Simple Swing window that provides a few configuration options
  * similar to those found in the RSLHelper application.
+
  */
 public class SettingsWindow extends JFrame {
     private final JCheckBox autoSell;
@@ -21,6 +22,10 @@ public class SettingsWindow extends JFrame {
     private final BotCore bot = new BotCore();
     private Thread botThread;
 
+    public SettingsWindow() {
+        super("RSL Bot Settings");
+        TemplateImages.ensureDefaults();
+
 
 
     private final JTextArea logArea = new JTextArea(8, 40);
@@ -28,6 +33,7 @@ public class SettingsWindow extends JFrame {
 
     public SettingsWindow() {
         super("RSL Bot Settings");
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -59,6 +65,7 @@ public class SettingsWindow extends JFrame {
 
         start.addActionListener(e -> toggleBot());
 
+
         JButton screenshot = new JButton("Screenshot");
         screenshot.addActionListener(e -> WindowClicker.saveScreenshot("raid-window.png"));
 
@@ -86,6 +93,7 @@ public class SettingsWindow extends JFrame {
         add(center, BorderLayout.CENTER);
         add(south, BorderLayout.SOUTH);
 
+
         buttons.add(screenshot);
 
         buttons.add(start);
@@ -109,7 +117,6 @@ public class SettingsWindow extends JFrame {
 
         add(center, BorderLayout.CENTER);
         add(save, BorderLayout.SOUTH);
-
 
 
         pack();
@@ -152,6 +159,7 @@ public class SettingsWindow extends JFrame {
             }
         }, "RSL-Bot");
         botThread.start();
+
     private void startBot() {
         saveSettings();
         // Attempt to click the "Start" button in the Raid: Shadow Legends window.
@@ -175,6 +183,7 @@ public class SettingsWindow extends JFrame {
 
 
 
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LogWindow.install();
@@ -183,7 +192,6 @@ public class SettingsWindow extends JFrame {
         });
 
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
-
 
     }
 }

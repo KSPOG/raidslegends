@@ -23,6 +23,7 @@ public final class LogWindow {
 
 
 
+
 /* * Simple window that displays log messages redirected from System.out/err.
  */
 public class LogWindow extends JFrame {
@@ -60,7 +61,6 @@ public class LogWindow extends JFrame {
         PrintStream ps = new PrintStream(new TextAreaOutputStream(log), true);
 
 
-
         System.setOut(ps);
         System.setErr(ps);
     }
@@ -76,11 +76,13 @@ public class LogWindow extends JFrame {
 
 
 
+
         private final LogWindow window;
         private final StringBuilder buffer = new StringBuilder();
 
         TextAreaOutputStream(LogWindow window) {
             this.window = window;
+
 
         }
 
@@ -99,7 +101,9 @@ public class LogWindow extends JFrame {
 
 
 
+
                 window.appendLine(buffer.toString());
+
 
                 buffer.setLength(0);
             } else {
