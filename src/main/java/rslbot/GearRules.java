@@ -1,6 +1,8 @@
 package rslbot;
 
 import java.util.Collections;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -18,8 +20,14 @@ public class GearRules {
     }
 
     public static List<SellRule> loadRules(String path) throws Exception {
+
         // JSON parsing removed to keep the project self-contained.
         return Collections.emptyList();
+
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(new File(path),
+                mapper.getTypeFactory().constructCollectionType(List.class, SellRule.class));
+
     }
 
     public static boolean shouldSell(String gearText, List<SellRule> rules) {
