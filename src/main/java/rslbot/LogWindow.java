@@ -20,7 +20,8 @@ public final class LogWindow {
     public static void install(JTextArea area) {
         PrintStream ps = new PrintStream(new TextAreaOutputStream(area), true);
 
- * Simple window that displays log messages redirected from System.out/err.
+
+/* * Simple window that displays log messages redirected from System.out/err.
  */
 public class LogWindow extends JFrame {
     private static LogWindow instance;
@@ -56,6 +57,7 @@ public class LogWindow extends JFrame {
         log.setVisible(true);
         PrintStream ps = new PrintStream(new TextAreaOutputStream(log), true);
 
+
         System.setOut(ps);
         System.setErr(ps);
     }
@@ -67,6 +69,7 @@ public class LogWindow extends JFrame {
 
         TextAreaOutputStream(JTextArea area) {
             this.area = area;
+
 
         private final LogWindow window;
         private final StringBuilder buffer = new StringBuilder();
@@ -88,7 +91,9 @@ public class LogWindow extends JFrame {
                     area.setCaretPosition(area.getDocument().getLength());
                 });
 
+
                 window.appendLine(buffer.toString());
+
                 buffer.setLength(0);
             } else {
                 buffer.append((char) b);

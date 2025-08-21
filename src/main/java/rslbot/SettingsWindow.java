@@ -11,19 +11,22 @@ public class SettingsWindow extends JFrame {
     private final JCheckBox autoSell;
     private final JCheckBox enableOcr;
     private final JSpinner runCount;
-
     private final JTextArea logArea = new JTextArea(8, 40);
 
+    private final JTextArea logArea = new JTextArea(8, 40);
 
     public SettingsWindow() {
         super("RSL Bot Settings");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        LogWindow.install(logArea);
+
         // Settings controls
         autoSell = new JCheckBox("Auto sell gear");
         enableOcr = new JCheckBox("Enable OCR");
         runCount = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
+
 
 
         JPanel settingsPanel = new JPanel(new GridLayout(0, 1));
@@ -51,6 +54,7 @@ public class SettingsWindow extends JFrame {
         add(center, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
 
+
         LogWindow.install(logArea);
 
         JPanel center = new JPanel(new GridLayout(0, 1));
@@ -65,7 +69,6 @@ public class SettingsWindow extends JFrame {
         add(center, BorderLayout.CENTER);
         add(save, BorderLayout.SOUTH);
 
-
         pack();
         setLocationRelativeTo(null); // center on screen
     }
@@ -79,15 +82,24 @@ public class SettingsWindow extends JFrame {
         System.out.println("  Runs per session: " + runCount.getValue());
     }
 
+    private void startBot() {
+        saveSettings();
+        // Attempt to click the "Start" button in the Raid: Shadow Legends window.
+        // Coordinates are examples and may require adjustment for individual setups.
+        WindowClicker.clickStartButton();
+        System.out.println("Start button clicked");
+
 
     private void startBot() {
         saveSettings();
         // Placeholder for actual bot start logic.
         System.out.println("Bot started");
+
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
