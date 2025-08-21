@@ -8,6 +8,7 @@ import java.awt.*;
  * those found in the RSLHelper application. A progress bar shows run progress
  * and the Start button toggles to Stop while the bot is active.
 
+
  * Simple Swing window that provides a few configuration options
  * similar to those found in the RSLHelper application.
 
@@ -25,6 +26,7 @@ public class SettingsWindow extends JFrame {
     public SettingsWindow() {
         super("RSL Bot Settings");
         TemplateImages.ensureDefaults();
+
 
 
 
@@ -66,6 +68,7 @@ public class SettingsWindow extends JFrame {
         start.addActionListener(e -> toggleBot());
 
 
+
         JButton screenshot = new JButton("Screenshot");
         screenshot.addActionListener(e -> WindowClicker.saveScreenshot("raid-window.png"));
 
@@ -92,6 +95,7 @@ public class SettingsWindow extends JFrame {
 
         add(center, BorderLayout.CENTER);
         add(south, BorderLayout.SOUTH);
+
 
 
         buttons.add(screenshot);
@@ -160,6 +164,7 @@ public class SettingsWindow extends JFrame {
         }, "RSL-Bot");
         botThread.start();
 
+
     private void startBot() {
         saveSettings();
         // Attempt to click the "Start" button in the Raid: Shadow Legends window.
@@ -179,6 +184,7 @@ public class SettingsWindow extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
 
 
 

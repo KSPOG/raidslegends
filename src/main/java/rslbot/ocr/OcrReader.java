@@ -1,6 +1,7 @@
 package rslbot.ocr;
 
 
+
 import net.sourceforge.tess4j.Tesseract;
 
 import java.awt.*;
@@ -30,6 +31,8 @@ public class OcrReader {
         try {
             Rectangle popup = new Rectangle(500, 300, 600, 400); // example coords
             BufferedImage img = new Robot().createScreenCapture(popup);
+            // Real OCR would process 'img' here. Returning null yields no gear text.
+            return null;
 
             // Real OCR would process 'img' here. Returning null yields no gear text.
             return null;

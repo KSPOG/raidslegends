@@ -1,11 +1,13 @@
 package rslbot;
 
+
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
+
 import java.awt.event.InputEvent;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
@@ -22,6 +24,9 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 /**
+ * Issues left mouse clicks using {@link Robot}. The cursor position is
+ * restored after each click so that the user's mouse is only momentarily
+ * affected. This avoids the need for native libraries such as JNA.
  * Utility for sending click events to on-screen coordinates while restoring the
  * mouse pointer to its original location. This avoids leaving the cursor
  * elsewhere on the user's desktop and keeps all interaction scoped to the
@@ -44,6 +49,9 @@ public final class WindowClicker {
     private WindowClicker() {}
 
     /**
+     * Performs a left-click at the given absolute screen coordinates. The
+     * method preserves the current mouse location and restores it once the
+     * click has been issued.
      * Convenience helper that aims a click at the centre of the screen. The
      * coordinates may require adjustment for a specific window layout.
      */
@@ -65,6 +73,21 @@ public final class WindowClicker {
             Robot robot = new Robot();
             Point original = MouseInfo.getPointerInfo().getLocation();
             robot.mouseMove(screenX, screenY);
+            robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+            Thread.sleep(50);
+            robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseMove(original.x, original.y);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Click failed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Captures a screenshot of the entire desktop and writes it to the given
+     * file path. This can assist in locating buttons manually.
+
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseMove(original.x, original.y);
@@ -150,6 +173,8 @@ public final class WindowClicker {
     }
 
     /**
+     * Returns an image of the full screen. Callers may crop to the Raid window
+     * if desired.
      * Returns a {@link BufferedImage} of the full screen. This method does not
      * attempt to locate the game window; callers may crop the image as needed.
      */

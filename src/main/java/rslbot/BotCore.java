@@ -28,8 +28,16 @@ public class BotCore {
         for (int i = 0; i < runs && running; i++) {
             System.out.println("\u25B6 Starting run " + (i + 1));
 
+            // If a previous run left the Victory screen open, immediately
+            // trigger a replay instead of searching for the Fight button.
+            if (screen.find("images/victory.png") != null) {
+                screen.findAndClick("images/replay_button.png");
+                Thread.sleep(3000);
+            } else if (!screen.findAndClick("images/fight_button.png")) {
+
             // Locate and click the Fight button inside the game client.
             if (!screen.findAndClick("images/fight_button.png")) {
+
                 System.out.println("Fight button not found!");
                 Thread.sleep(3000);
                 continue;

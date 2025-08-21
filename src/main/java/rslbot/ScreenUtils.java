@@ -19,12 +19,21 @@ import java.awt.image.BufferedImage;
  */
 public class ScreenUtils {
     /**
+     * Finds the given template and clicks the centre of the matched region.
+     */
+    public boolean findAndClick(String templatePath) {
+        Rectangle r = find(templatePath);
+        if (r != null) {
+            int centreX = r.x + r.width / 2;
+            int centreY = r.y + r.height / 2;
+            WindowClicker.click(centreX, centreY);
      * Finds the given template and sends a click to its top-left coordinate.
      */
     public boolean findAndClick(String templatePath) {
         Point p = find(templatePath);
         if (p != null) {
             WindowClicker.click(p.x, p.y);
+
             return true;
         }
         return false;
@@ -34,6 +43,7 @@ public class ScreenUtils {
      * Returns the on-screen coordinates of the template if it is found with a
      * reasonable match score, otherwise {@code null}.
      */
+    public Rectangle find(String templatePath) {
     public Point find(String templatePath) {
         try {
             BufferedImage screenshot = new Robot().createScreenCapture(
@@ -48,6 +58,9 @@ public class ScreenUtils {
             for (int y = 0; y <= screenshot.getHeight() - template.getHeight(); y++) {
                 for (int x = 0; x <= screenshot.getWidth() - template.getWidth(); x++) {
                     if (matches(screenshot, template, x, y)) {
+                        return new Rectangle(x, y, template.getWidth(), template.getHeight());
+                    }
+                }
                         return new Point(x, y);
                     }
                 }
@@ -83,6 +96,5 @@ public class ScreenUtils {
         Mat mat = new Mat(height, width, opencv_core.CV_8UC3);
         // Conversion code omitted for brevity.
         return mat;
-
     }
 }

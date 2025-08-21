@@ -24,6 +24,10 @@ public class GearRules {
         // JSON parsing removed to keep the project self-contained.
         return Collections.emptyList();
 
+
+        // JSON parsing removed to keep the project self-contained.
+        return Collections.emptyList();
+
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(new File(path),
                 mapper.getTypeFactory().constructCollectionType(List.class, SellRule.class));
