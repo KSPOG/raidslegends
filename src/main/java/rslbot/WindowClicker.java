@@ -17,6 +17,18 @@ import javax.imageio.ImageIO;
 /**
  * Utility to send mouse clicks directly to the Raid: Shadow Legends window
  * without taking control of the user's mouse cursor.
+
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
+/**
+ * Utility to send mouse clicks to the Raid: Shadow Legends window.
+ * <p>
+ * This implementation simply moves the mouse and performs a click at the
+ * provided screen coordinates. In a full solution the coordinates would be
+ * calculated dynamically based on image recognition or window position.
+ * </p>
+
  */
 public final class WindowClicker {
     private WindowClicker() {}
@@ -115,6 +127,19 @@ public final class WindowClicker {
         } catch (Exception e) {
             System.out.println("Failed to capture screenshot: " + e.getMessage());
             return null;
+
+     * Moves the mouse to {@code (x, y)} and performs a left click.
+     */
+    public static void click(int x, int y) {
+        try {
+            Robot robot = new Robot();
+            robot.mouseMove(x, y);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        } catch (Exception e) {
+            // Log stack trace for troubleshooting
+            e.printStackTrace();
+
         }
     }
 }
