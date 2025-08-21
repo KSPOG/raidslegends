@@ -11,7 +11,9 @@ public class SettingsWindow extends JFrame {
     private final JCheckBox autoSell;
     private final JCheckBox enableOcr;
     private final JSpinner runCount;
+
     private final JTextArea logArea = new JTextArea(8, 40);
+
 
     public SettingsWindow() {
         super("RSL Bot Settings");
@@ -22,6 +24,7 @@ public class SettingsWindow extends JFrame {
         autoSell = new JCheckBox("Auto sell gear");
         enableOcr = new JCheckBox("Enable OCR");
         runCount = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
+
 
         JPanel settingsPanel = new JPanel(new GridLayout(0, 1));
         settingsPanel.add(autoSell);
@@ -50,6 +53,19 @@ public class SettingsWindow extends JFrame {
 
         LogWindow.install(logArea);
 
+        JPanel center = new JPanel(new GridLayout(0, 1));
+        center.add(autoSell);
+        center.add(enableOcr);
+        center.add(new JLabel("Runs per session:"));
+        center.add(runCount);
+
+        JButton save = new JButton("Save");
+        save.addActionListener(e -> saveSettings());
+
+        add(center, BorderLayout.CENTER);
+        add(save, BorderLayout.SOUTH);
+
+
         pack();
         setLocationRelativeTo(null); // center on screen
     }
@@ -63,6 +79,7 @@ public class SettingsWindow extends JFrame {
         System.out.println("  Runs per session: " + runCount.getValue());
     }
 
+
     private void startBot() {
         saveSettings();
         // Placeholder for actual bot start logic.
@@ -71,5 +88,15 @@ public class SettingsWindow extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            LogWindow.install();
+            new SettingsWindow().setVisible(true);
+            System.out.println("Settings window displayed");
+        });
+
+        SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
     }
 }
