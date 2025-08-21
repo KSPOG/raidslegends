@@ -48,6 +48,13 @@ public class SettingsWindow extends JFrame {
     }
 
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            LogWindow.install();
+            new SettingsWindow().setVisible(true);
+            System.out.println("Settings window displayed");
+        });
+
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
     }
 }
