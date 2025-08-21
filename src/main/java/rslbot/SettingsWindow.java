@@ -53,5 +53,8 @@ public class SettingsWindow extends JFrame {
             new SettingsWindow().setVisible(true);
             System.out.println("Settings window displayed");
         });
+
+        SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
     }
 }
