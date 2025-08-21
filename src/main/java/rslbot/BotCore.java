@@ -34,6 +34,10 @@ public class BotCore {
                 screen.findAndClick("images/replay_button.png");
                 Thread.sleep(3000);
             } else if (!screen.findAndClick("images/fight_button.png")) {
+
+            // Locate and click the Fight button inside the game client.
+            if (!screen.findAndClick("images/fight_button.png")) {
+
                 System.out.println("Fight button not found!");
                 Thread.sleep(3000);
                 continue;
