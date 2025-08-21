@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 /**
  * Utility to send mouse clicks directly to the Raid: Shadow Legends window
  * without taking control of the user's mouse cursor.
+
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 
@@ -27,6 +28,7 @@ import java.awt.event.InputEvent;
  * provided screen coordinates. In a full solution the coordinates would be
  * calculated dynamically based on image recognition or window position.
  * </p>
+
  */
 public final class WindowClicker {
     private WindowClicker() {}

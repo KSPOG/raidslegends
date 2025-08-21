@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Simple Swing window that provides a few configuration options similar to
+ * those found in the RSLHelper application. A progress bar shows run progress
+ * and the Start button toggles to Stop while the bot is active.
+
  * Simple Swing window that provides a few configuration options
  * similar to those found in the RSLHelper application.
  */
@@ -12,9 +16,15 @@ public class SettingsWindow extends JFrame {
     private final JCheckBox enableOcr;
     private final JSpinner runCount;
     private final JTextArea logArea = new JTextArea(8, 40);
+    private final JProgressBar progress = new JProgressBar();
+    private final JButton start = new JButton("Start");
+    private final BotCore bot = new BotCore();
+    private Thread botThread;
+
 
 
     private final JTextArea logArea = new JTextArea(8, 40);
+
 
     public SettingsWindow() {
         super("RSL Bot Settings");
@@ -42,6 +52,13 @@ public class SettingsWindow extends JFrame {
         center.add(settingsPanel, BorderLayout.NORTH);
         center.add(logScroll, BorderLayout.CENTER);
 
+        progress.setStringPainted(true);
+
+        JButton screenshot = new JButton("Screenshot");
+        screenshot.addActionListener(e -> WindowClicker.saveScreenshot("raid-window.png"));
+
+        start.addActionListener(e -> toggleBot());
+
         JButton screenshot = new JButton("Screenshot");
         screenshot.addActionListener(e -> WindowClicker.saveScreenshot("raid-window.png"));
 
@@ -52,10 +69,22 @@ public class SettingsWindow extends JFrame {
         JButton start = new JButton("Start");
         start.addActionListener(e -> startBot());
 
+
         JButton save = new JButton("Save");
         save.addActionListener(e -> saveSettings());
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        buttons.add(screenshot);
+        buttons.add(start);
+        buttons.add(save);
+
+        JPanel south = new JPanel(new BorderLayout());
+        south.add(progress, BorderLayout.NORTH);
+        south.add(buttons, BorderLayout.SOUTH);
+
+        add(center, BorderLayout.CENTER);
+        add(south, BorderLayout.SOUTH);
 
         buttons.add(screenshot);
 
@@ -82,6 +111,7 @@ public class SettingsWindow extends JFrame {
         add(save, BorderLayout.SOUTH);
 
 
+
         pack();
         setLocationRelativeTo(null); // center on screen
     }
@@ -95,6 +125,33 @@ public class SettingsWindow extends JFrame {
         System.out.println("  Runs per session: " + runCount.getValue());
     }
 
+    private void toggleBot() {
+        if (botThread != null && botThread.isAlive()) {
+            bot.stop();
+            start.setEnabled(false);
+            return;
+        }
+
+        saveSettings();
+        int runs = (Integer) runCount.getValue();
+        progress.setMaximum(runs);
+        progress.setValue(0);
+        start.setText("Stop");
+
+        botThread = new Thread(() -> {
+            try {
+                bot.startBot(runs, (cur, total) ->
+                        SwingUtilities.invokeLater(() -> progress.setValue(cur)));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                SwingUtilities.invokeLater(() -> {
+                    start.setText("Start");
+                    start.setEnabled(true);
+                });
+            }
+        }, "RSL-Bot");
+        botThread.start();
     private void startBot() {
         saveSettings();
         // Attempt to click the "Start" button in the Raid: Shadow Legends window.
@@ -117,6 +174,7 @@ public class SettingsWindow extends JFrame {
 
 
 
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             LogWindow.install();
@@ -125,6 +183,7 @@ public class SettingsWindow extends JFrame {
         });
 
         SwingUtilities.invokeLater(() -> new SettingsWindow().setVisible(true));
+
 
     }
 }
