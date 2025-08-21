@@ -1,3 +1,5 @@
 @echo off
+set "PATH=C:\msys64\mingw64\bin;%PATH%"
 if not exist build mkdir build
-x86_64-w64-mingw32-g++ -shared -o build/RaidClient.dll RaidClient.cpp -lgdi32 -luser32
+x86_64-w64-mingw32-g++ -shared -o build\RaidClient.dll RaidClient.cpp -lgdi32 -luser32
+PAUSE
